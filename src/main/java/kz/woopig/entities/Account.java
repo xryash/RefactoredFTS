@@ -1,0 +1,53 @@
+package kz.woopig.entities;
+
+public class Account {
+
+    private int id;
+    private final String login;
+    private final String password;
+    private final String role;
+
+    public Account(String login, String password, String role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
+    public Account(int id, String login, String password, String role) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" + "id=" + id + ", login=" + login + ", password=" + password  + ", role=" + role + '}';
+    }
+
+
+
+
+
+
+}
