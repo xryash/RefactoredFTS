@@ -11,8 +11,6 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import java.util.List;
-
 public class FileRepositoryTest {
 
     private EmbeddedDatabase embeddedDatabase;

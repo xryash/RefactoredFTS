@@ -49,7 +49,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             throw new ProviderException(
                     Response.Status.UNAUTHORIZED.getStatusCode(),
                     new ServiceError("UNAUTHORIZED", "UNAUTHORIZED"),
-                    String.format("UNAUTHORIZED"));
+                    "UNAUTHORIZED");
         }
 
         final String encodedUserPassword = authorization.replaceFirst(AUTHENTICATION_SCHEME + " ", "");
@@ -65,7 +65,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             throw new ProviderException(
                     Response.Status.UNAUTHORIZED.getStatusCode(),
                     new ServiceError("UNAUTHORIZED", "UNAUTHORIZED"),
-                    String.format("UNAUTHORIZED"));
+                    "UNAUTHORIZED");
         }
 
         final SecurityContext securityContext
@@ -73,7 +73,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         requestContext.setSecurityContext(new SecurityContext() {
             @Override
             public Principal getUserPrincipal() {
-                return () -> account.getLogin();
+                return account::getLogin;
             }
 
             @Override

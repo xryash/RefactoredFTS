@@ -28,11 +28,11 @@ public interface AccountHandler {
             System.out.println("Запрос обрабатывается");
 
             if(request == null) {
-                throw new AccountException(new ServiceError("missingAccountError", "Missing Account data"), String.format("Missing Parameter: request"));
+                throw new AccountException(new ServiceError("missingAccountError", "Missing Account data"), "Missing Parameter: request");
             }
 
             if(request.getData() == null || request.getData().isEmpty()) {
-                throw new AccountException(new ServiceError("missingAccountError", "Missing Account data"), String.format("Missing Parameter: request.authorization"));
+                throw new AccountException(new ServiceError("missingAccountError", "Missing Account data"), "Missing Parameter: request.authorization");
             }
 
             String authorization = request.getData();
@@ -43,22 +43,22 @@ public interface AccountHandler {
             final String password = tokenizer.nextToken();
 
             if(login == null) {
-                throw new AccountException(new ServiceError("missingAccountError", "Missing Account data"), String.format("Missing Parameter: username"));
+                throw new AccountException(new ServiceError("missingAccountError", "Missing Account data"), "Missing Parameter: username");
             }
 
             if(password == null) {
-                throw new AccountException(new ServiceError("missingAccountError", "Missing Account data"), String.format("Missing Parameter: password"));
+                throw new AccountException(new ServiceError("missingAccountError", "Missing Account data"), "Missing Parameter: password");
             }
 
             if (accountRepository.getByLogin(login) != null){
-                throw new AccountException(new ServiceError("repeatingAccountError", "Repeating Account data"), String.format("Repeating Parameter: request.account"));
+                throw new AccountException(new ServiceError("repeatingAccountError", "Repeating Account data"), "Repeating Parameter: request.account");
             }
 
             String role = "USER";
             Account account = new Account(login,password,role);
 
             if  (accountRepository.save(account) == 0){
-                throw new AccountException(new ServiceError("savingAccountError", "Error saving"), String.format("Saving Account failed"));
+                throw new AccountException(new ServiceError("savingAccountError", "Error saving"), "Saving Account failed");
             }
             System.out.println("Аккаунт сохранён в базу");
             System.out.println(account.toString());

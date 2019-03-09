@@ -32,9 +32,11 @@ public class Account {
         return role;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+// --Commented out by Inspection START (09.03.19 21:21):
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+// --Commented out by Inspection STOP (09.03.19 21:21)
 
     public String getLogin() {
         return login;

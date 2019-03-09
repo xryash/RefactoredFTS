@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class LocalFile {
 
     private int id;
-    private int host;
-    private String targetFileName;
-    private String submittedFileName;
-    private String directory;
+    private final int host;
+    private final String targetFileName;
+    private final String submittedFileName;
+    private final String directory;
 
 
     public LocalFile(int id, int host, String targetFileName, String submittedFileName, String directory) {

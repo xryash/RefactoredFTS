@@ -11,14 +11,12 @@ import java.util.List;
 
 public interface FileRepository {
 
-    RowMapper<LocalFile> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> {
-        return new LocalFile(
-                            resultSet.getInt("id"),
-                            resultSet.getInt("host"),
-                            resultSet.getString("targetFileName"),
-                            resultSet.getString("submittedFileName"),
-                            resultSet.getString("directory"));
-    };
+    RowMapper<LocalFile> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> new LocalFile(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("host"),
+                        resultSet.getString("targetFileName"),
+                        resultSet.getString("submittedFileName"),
+                        resultSet.getString("directory"));
 
 
     List<LocalFile> getAll();
@@ -34,8 +32,7 @@ public interface FileRepository {
 
         public FileRepositoryImpl () {
             DataBaseProvider provider = DataBaseProvider.dataBaseProvider();
-            JdbcTemplate jdbcTemplate = provider.jdbcTemplate();
-            this.jdbcTemplate = jdbcTemplate;
+            this.jdbcTemplate = provider.jdbcTemplate();
         }
 
         public FileRepositoryImpl (JdbcTemplate jdbcTemplate) {

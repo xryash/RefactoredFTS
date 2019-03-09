@@ -9,13 +9,11 @@ import java.sql.ResultSet;
 
 public interface AccountRepository {
 
-    RowMapper<Account> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> {
-        return new Account(
-                resultSet.getInt("id"),
-                resultSet.getString("login"),
-                resultSet.getString("password"),
-                resultSet.getString("role"));
-    };
+    RowMapper<Account> ROW_MAPPER = (ResultSet resultSet, int rowNum) -> new Account(
+            resultSet.getInt("id"),
+            resultSet.getString("login"),
+            resultSet.getString("password"),
+            resultSet.getString("role"));
 
     Account getById(int id);
     Account getByLogin(String login);
@@ -28,8 +26,7 @@ public interface AccountRepository {
 
         public AccountRepositoryImpl() {
             DataBaseProvider provider = DataBaseProvider.dataBaseProvider();
-            JdbcTemplate jdbcTemplate = provider.jdbcTemplate();
-            this.jdbcTemplate = jdbcTemplate;
+            this.jdbcTemplate = provider.jdbcTemplate();
         }
 
         public AccountRepositoryImpl(JdbcTemplate jdbcTemplate) {

@@ -40,13 +40,13 @@ public interface UploadingFileHandler {
             System.out.println("Запрос обрабатывается");
 
             if (request == null) {
-                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data request"), String.format("Missing Parameter: request"));
+                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data request"), "Missing Parameter: request");
             }
 
             String login = request.getLogin();
 
             if (login == null) {
-                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data request.login"), String.format("Missing Parameter: request.login"));
+                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data request.login"), "Missing Parameter: request.login");
             }
 
             final HttpFile httpFile = request.getHttpFile();
@@ -61,7 +61,7 @@ public interface UploadingFileHandler {
             LocalFile localFile = new LocalFile(host, targetFileName, httpFile.getSubmittedFileName(), httpFile.getDirectory());
 
             if (fileRepository.save(localFile) == 0) {
-                throw new UploadingFileException(new ServiceError("savingFileError", "Error saving"), String.format("Saving File failed"));
+                throw new UploadingFileException(new ServiceError("savingFileError", "Error saving"), "Saving File failed");
             }
 
             writeFile(httpFile.getStream(), targetFileName);
@@ -73,7 +73,7 @@ public interface UploadingFileHandler {
         private void verifyHttpFile(HttpFile httpFile) {
 
             if (httpFile == null) {
-                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data request.httpFile"), String.format("Missing Parameter: request.httpFile"));
+                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data request.httpFile"), "Missing Parameter: request.httpFile");
             }
 
             String directory = httpFile.getDirectory();
@@ -82,19 +82,19 @@ public interface UploadingFileHandler {
             InputStream stream = httpFile.getStream();
 
             if (directory == null) {
-                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data httpFile.directory"), String.format("Missing Parameter: httpFile.directory"));
+                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data httpFile.directory"), "Missing Parameter: httpFile.directory");
             }
 
             if (size <= 0) {
-                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data httpFile.size"), String.format("Missing Parameter: httpFile.size"));
+                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data httpFile.size"), "Missing Parameter: httpFile.size");
             }
 
             if (submittedFileName == null) {
-                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data httpFile.submittedFileName"), String.format("Missing Parameter: httpFile.submittedFileName"));
+                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data httpFile.submittedFileName"), "Missing Parameter: httpFile.submittedFileName");
             }
 
             if (stream == null) {
-                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data httpFile.stream"), String.format("Missing Parameter: httpFile.stream"));
+                throw new UploadingFileException(new ServiceError("missingFile", "Missing File data httpFile.stream"), "Missing Parameter: httpFile.stream");
             }
         }
 
@@ -106,7 +106,7 @@ public interface UploadingFileHandler {
                 //Files.copy(stream, target, options)
 
             } catch (Exception e) {
-                throw new UploadingFileException(new ServiceError("storingFileError", "Error writing file"), String.format("Writing File failed"));
+                throw new UploadingFileException(new ServiceError("storingFileError", "Error writing file"), "Writing File failed");
             }
         }
     }

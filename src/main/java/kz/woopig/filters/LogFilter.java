@@ -8,7 +8,6 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ import java.util.Map;
 public class LogFilter implements ContainerRequestFilter, ContainerResponseFilter {
 
     @Override
-    public void filter(ContainerRequestContext reqContext) throws IOException {
+    public void filter(ContainerRequestContext reqContext) {
         System.out.println("-- req headers --");
         log(reqContext.getUriInfo(), reqContext.getHeaders());
 
@@ -25,7 +24,7 @@ public class LogFilter implements ContainerRequestFilter, ContainerResponseFilte
 
     @Override
     public void filter(ContainerRequestContext reqContext,
-                       ContainerResponseContext resContext) throws IOException {
+                       ContainerResponseContext resContext) {
         System.out.println("-- res headers --");
         log(reqContext.getUriInfo(), resContext.getHeaders());
 

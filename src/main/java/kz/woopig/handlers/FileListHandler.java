@@ -33,14 +33,9 @@ public interface FileListHandler {
             Account account = accountRepository.getByLogin(login);
 
             if(account == null)
-                throw new DownloadingFileException(new ServiceError("NotExistingData", "Not existing account data"), String.format("Account doesnt exist"));
+                throw new DownloadingFileException(new ServiceError("NotExistingData", "Not existing account data"), "Account doesnt exist");
 
-            List<LocalFile> list = fileRepository.getFilesByHost(account.getId());
-
-            if(account == null)
-                throw new DownloadingFileException(new ServiceError("NotExistingData", "Not existing file data"), String.format("Files are null"));
-
-            return list;
+            return fileRepository.getFilesByHost(account.getId());
         }
     }
 

@@ -12,7 +12,7 @@ public class DataBaseProvider {
     private final String dbUsername;
     private final String dbPassword;
 
-    public DataBaseProvider(String dbUrl, String dbUsername, String dbPassword) {
+    private DataBaseProvider(String dbUrl, String dbUsername, String dbPassword) {
         this.dbUrl = dbUrl;
         this.dbUsername = dbUsername;
         this.dbPassword = dbPassword;
